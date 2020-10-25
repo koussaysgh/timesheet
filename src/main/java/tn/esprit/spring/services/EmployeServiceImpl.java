@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,19 +31,100 @@ public class EmployeServiceImpl implements IEmployeService {
 	ContratRepository contratRepoistory;
 	@Autowired
 	TimesheetRepository timesheetRepository;
+	private static final Logger l = Logger.getLogger(EntrepriseServiceImpl.class); 
 
 	@Override
 	public Employe authenticate(String login, String password) {
 		return employeRepository.getEmployeByEmailAndPassword(login, password);
 	}
+// -------------------------------------------------------------crud
+	
+	
 
 	@Override
-	public int addOrUpdateEmploye(Employe employe) {
-		employeRepository.save(employe);
-		return employe.getId();
+	public Employe ajoutEmploye(Employe employe) {
+		try {
+			l.info(" loading save employe");
+			Employe em = employeRepository.save(employe);
+			l.info(" Successful saving employe");
+			return em;
+		} catch (Exception e) {
+l.error("saving not completed !!!!");	
+}
+		
+		return null;
 	}
 
 
+	@Override
+	public Employe updateEmploye(Employe employe) {
+		try {
+			l.info(" loading update employe");
+			Employe em = employeRepository.save(employe);
+			l.info(" Successful update employe");
+			return em;
+		} catch (Exception e) {
+l.error("update not completed !!!!");	
+}
+		
+		return null;
+	}
+
+	public void deleteEmploye(int employeId)
+	{
+		try {
+			l.info(" shearch for employe");
+
+			Employe em=employeRepository.findById(employeId).get();
+			l.info(" found employe");
+			l.info(" deleting  employe");
+			employeRepository.delete(em);
+			l.info(" operation finish  employe");
+		
+		} catch (Exception e) {
+			l.error("employe could not be found !!!!");	
+		}
+
+		
+	}
+	
+	
+	public List<Employe> getAllEmployes() {
+		try {
+			l.info(" get all  employees");
+
+			return (List<Employe>) employeRepository.findAll();
+		
+
+			
+		} catch (Exception e) {
+			l.error("get all  employees operation failedZP !!!!");	
+		}
+		return null;
+	}
+	@Override
+	public Employe getEmployeById(int id) {
+		try {
+			l.info(" get   employee with id" +id);
+
+			return  employeRepository.findById(id).get();
+		
+
+			
+		} catch (Exception e) {
+			l.error("get   employe operation failed !!!!");	
+		}
+		return null;
+	}
+	
+
+//------------------------------------------------
+	@Override
+	public int addOrUpdateEmploye(Employe employe) {
+		
+		employeRepository.save(employe);
+		return employe.getId();
+	}
 	public void mettreAjourEmailByEmployeId(String email, int employeId) {
 		Employe employe = employeRepository.findById(employeId).get();
 		employe.setEmail(email);
@@ -104,19 +186,7 @@ public class EmployeServiceImpl implements IEmployeService {
 		return employeManagedEntity.getPrenom();
 	}
 	 
-	public void deleteEmployeById(int employeId)
-	{
-		Employe employe = employeRepository.findById(employeId).get();
-
-		//Desaffecter l'employe de tous les departements
-		//c'est le bout master qui permet de mettre a jour
-		//la table d'association
-		for(Departement dep : employe.getDepartements()){
-			dep.getEmployes().remove(employe);
-		}
-
-		employeRepository.delete(employe);
-	}
+	
 
 	public void deleteContratById(int contratId) {
 		Contrat contratManagedEntity = contratRepoistory.findById(contratId).get();
@@ -158,8 +228,18 @@ public class EmployeServiceImpl implements IEmployeService {
 		return timesheetRepository.getTimesheetsByMissionAndDate(employe, mission, dateDebut, dateFin);
 	}
 
-	public List<Employe> getAllEmployes() {
-		return (List<Employe>) employeRepository.findAll();
+
+
+	@Override
+	public void deleteEmployeById(int employeId) {
+		// TODO Auto-generated method stub
+		
 	}
+
+
+
+	
+	
+
 
 }

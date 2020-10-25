@@ -13,7 +13,11 @@ import tn.esprit.spring.entities.Timesheet;
 public interface IEmployeService {
 	
 	public Employe authenticate(String login, String password) ;
-	 
+	public Employe getEmployeById(int employe) ;
+	public Employe ajoutEmploye(Employe employe) ;
+	public void deleteEmployeById(int employeId);
+	public List<Employe> getAllEmployes();
+	public Employe updateEmploye(Employe employe) ;
 	
 	public void mettreAjourEmailByEmployeId(String email, int employeId);
 	public void affecterEmployeADepartement(int employeId, int depId);
@@ -21,7 +25,6 @@ public interface IEmployeService {
 	public int ajouterContrat(Contrat contrat);
 	public void affecterContratAEmploye(int contratId, int employeId);
 	public String getEmployePrenomById(int employeId);
-	public void deleteEmployeById(int employeId);
 	public void deleteContratById(int contratId);
 	public int getNombreEmployeJPQL();
 	public List<String> getAllEmployeNamesJPQL();
@@ -30,7 +33,7 @@ public interface IEmployeService {
 	public void deleteAllContratJPQL();
 	public float getSalaireByEmployeIdJPQL(int employeId);
 	public Double getSalaireMoyenByDepartementId(int departementId);
-	public List<Employe> getAllEmployes();
+
 	public List<Timesheet> getTimesheetsByMissionAndDate(Employe employe, Mission mission, 
 	Date dateDebut, Date dateFin);
 

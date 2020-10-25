@@ -24,7 +24,7 @@ public class Employe implements Serializable {
 	private static final long serialVersionUID = -1396669830860400871L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
 	private String prenom;
@@ -95,6 +95,19 @@ public class Employe implements Serializable {
 		this.role = role;
 	}
 	
+	
+
+	public Employe(int id, String prenom, String nom, String email, boolean actif, Role role) {
+		super();
+		this.id = id;
+		this.prenom = prenom;
+		this.nom = nom;
+		this.email = email;
+		this.actif = actif;
+		this.role = role;
+	}
+
+
 	public int getId() {
 		return id;
 	}
