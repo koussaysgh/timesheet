@@ -38,8 +38,7 @@ public class DepartementServiceImplTest {
 		}
 	
 	@Test
-
-	public void testUpdateDepartement() {
+     public void testUpdateDepartement() {
 
 	Departement dep=ids.getDepartmentById(5);
 	dep.setName("dep4");
