@@ -1,6 +1,7 @@
 package tn.esprit.spring.services;
 
 import java.text.SimpleDateFormat;
+
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import tn.esprit.spring.repository.DepartementRepository;
 import tn.esprit.spring.repository.EmployeRepository;
 import tn.esprit.spring.repository.MissionRepository;
 import tn.esprit.spring.repository.TimesheetRepository;
+import org.apache.log4j.Logger;
 
 @Service
 public class TimesheetServiceImpl implements ITimesheetService {
@@ -30,21 +32,43 @@ public class TimesheetServiceImpl implements ITimesheetService {
 	TimesheetRepository timesheetRepository;
 	@Autowired
 	EmployeRepository employeRepository;
+	private static final Logger l = Logger.getLogger(TimesheetServiceImpl.class); 
 	
-	public int ajouterMission(Mission mission) {
-		missionRepository.save(mission);
-		return mission.getId();
+	public Mission ajouterMission(Mission mission) {
+		try {
+			l.info(" loading ajouter mission");
+	Mission m=	missionRepository.save(mission);
+		l.info(" mission ajouté avec succés");
+	return m;
+		} 
+		catch (Exception e) {
+			l.error("saving not completed !!!!");	
+		
+		}
+		return null;
 	}
     
 	public void affecterMissionADepartement(int missionId, int depId) {
+		
+		try { 
+		
+			l.info(" begin affecter Mission a deparement ");
+		
 		Mission mission = missionRepository.findById(missionId).get();
 		Departement dep = deptRepoistory.findById(depId).get();
 		mission.setDepartement(dep);
 		missionRepository.save(mission);
+		l.info("affectation complete ....");
+		} catch (Exception e){
+			l.error("faild to affecter");
+			
+		}
 		
 	}
 
 	public void ajouterTimesheet(int missionId, int employeId, Date dateDebut, Date dateFin) {
+		try {
+			l.info("Begin Ajout Timesheet");
 		TimesheetPK timesheetPK = new TimesheetPK();
 		timesheetPK.setDateDebut(dateDebut);
 		timesheetPK.setDateFin(dateFin);
@@ -55,7 +79,12 @@ public class TimesheetServiceImpl implements ITimesheetService {
 		timesheet.setTimesheetPK(timesheetPK);
 		timesheet.setValide(false); //par defaut non valide
 		timesheetRepository.save(timesheet);
-		
+		l.info("ajout time sheet complete");
+		}
+		catch (Exception e) {
+			l.error("faild  to add timesheet");
+			
+		}
 	}
 
 	
@@ -93,12 +122,30 @@ public class TimesheetServiceImpl implements ITimesheetService {
 
 	
 	public List<Mission> findAllMissionByEmployeJPQL(int employeId) {
+		
+		try { 
+			l.info(" Find all mission by employe ");
+		
 		return timesheetRepository.findAllMissionByEmployeJPQL(employeId);
+	
+		} catch (Exception e) { 
+			l.error("faild to find mission ");
+			
+		}
+		return null;
 	}
 
 	
 	public List<Employe> getAllEmployeByMission(int missionId) {
+		try { 
+			l.info(" Find all employes by mission  ");
+		
 		return timesheetRepository.getAllEmployeByMission(missionId);
+		} catch (Exception e) { 
+			l.error("faild to find employees");
+			
+		}
+		return null;
 	}
 
 }
