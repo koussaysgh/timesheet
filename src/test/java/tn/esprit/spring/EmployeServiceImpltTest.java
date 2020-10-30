@@ -1,5 +1,6 @@
 package tn.esprit.spring;
 
+
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -37,14 +38,11 @@ public class EmployeServiceImpltTest {
 
 
 	@Test
-
 	public void testUpdateEmploye() {
-
 	Employe e=ems.getEmployeById(2);
 	e.setNom("sami"+" +");
 	Employe em= ems.updateEmploye(e);
 	Assert.assertEquals(e.getNom(), em.getNom());
-		
 	}
 
 	
