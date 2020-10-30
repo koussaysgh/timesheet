@@ -1,6 +1,6 @@
 package tn.esprit.spring.services;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +21,88 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 	@Autowired
 	DepartementRepository deptRepoistory;
 
-	public int ajouterEntreprise(Entreprise entreprise) {
-		entrepriseRepoistory.save(entreprise);
-		return entreprise.getId();
+	private static final Logger l = Logger.getLogger(EntrepriseServiceImpl.class); 
+	
+	// -------------------------------------------------------------crud
+	public Entreprise ajouterEntreprise(Entreprise entreprise) {
+		try {
+			l.info(" loading save entreprise");
+			Entreprise em = entrepriseRepoistory.save(entreprise);
+			l.info(" Successful saving entreprise");
+			return em;
+		} catch (Exception e) {
+           l.error("saving not completed !!!!");	
+          }return null;
+	      }
+	
+	@Override
+	public Entreprise updateEntreprise(Entreprise entreprise) {
+		try {
+			l.info(" loading update entreprise");
+			Entreprise em = entrepriseRepoistory.save(entreprise);
+			l.info(" Successful update entreprise");
+			return em;
+		} catch (Exception e) { 
+         l.error("update not completed !!!!");	
+        }
+		
+		return null;
+	}
+	
+	@Transactional
+	public void deleteEntrepriseById(int entrepriseId) {
+		try {
+			l.info(" search for entreprise");
+			Entreprise em = entrepriseRepoistory.findById(entrepriseId).get();
+			l.info(" found entreprise");
+			l.info(" deleting  entreprise");
+		entrepriseRepoistory.delete(em);
+		l.info(" operation finish  entreprise");
+		} catch (Exception e) {
+			l.error("entreprise could not be found !!!!");	
+		}
+	}
+	
+	@Override
+	public Entreprise getEntrepriseById(int entrepriseId) {
+		try {
+			l.info(" get entreprise with id = " + entrepriseId);
+
+			    Entreprise e =  entrepriseRepoistory.findById(entrepriseId).get();
+				l.info("entreprise returned : " + e);
+                return e ;
+
+			
+		} catch (Exception e) {
+			l.error("get entreprise operation failed !!!!");	
+		}
+		return null;
+	}
+	
+	@Override
+	public List<Entreprise> getAllEntreprises() {
+		
+			l.info(" In getAllEntreprises");
+
+			List<Entreprise> entreprises =  (List<Entreprise>) entrepriseRepoistory.findAll();
+		
+			for (Entreprise ent : entreprises) {
+				l.debug("entreprise +++ : " + ent);
+			}
+			
+		
+			l.info("out of getAllEntreprises ");	
+		
+		return entreprises;
 	}
 
+//----------------------------------------------------------------------
+	
 	public int ajouterDepartement(Departement dep) {
 		deptRepoistory.save(dep);
 		return dep.getId();
 	}
+	
 	
 	public void affecterDepartementAEntreprise(int depId, int entrepriseId) {
 		//Le bout Master de cette relation N:1 est departement  
@@ -55,10 +128,7 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 		return depNames;
 	}
 
-	@Transactional
-	public void deleteEntrepriseById(int entrepriseId) {
-		entrepriseRepoistory.delete(entrepriseRepoistory.findById(entrepriseId).get());	
-	}
+	
 
 	@Transactional
 	public void deleteDepartementById(int depId) {
@@ -66,8 +136,5 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 	}
 
 
-	public Entreprise getEntrepriseById(int entrepriseId) {
-		return entrepriseRepoistory.findById(entrepriseId).get();	
-	}
-
+	
 }
