@@ -53,12 +53,13 @@ public class TimesheetServiceImpl implements ITimesheetService {
 		try { 
 		
 			l.info(" begin affecter Mission a deparement ");
+			
 		
 		Mission mission = missionRepository.findById(missionId).get();
 		Departement dep = deptRepoistory.findById(depId).get();
 		mission.setDepartement(dep);
 		missionRepository.save(mission);
-		l.info("affectation complete ....");
+		l.info("affectation complete ...");
 		} catch (Exception e){
 			l.error("faild to affecter");
 			
