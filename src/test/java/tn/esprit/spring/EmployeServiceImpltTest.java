@@ -37,8 +37,11 @@ public class EmployeServiceImpltTest {
 	@Test
 	public void testAjoutEmploye() {
 		
-		Employe e=new Employe(1,"sami", "samsar", "sami@gmail.com", true, Role.ADMINISTRATEUR);
+		Employe e=new Employe(1,"ali", "samsar", "sami@gmail.com", true, Role.ADMINISTRATEUR);
+		
 		Employe em= ems.ajoutEmploye(e);
+		
+
 		Assert.assertEquals(e.getNom(), em.getNom());
 		
 		
@@ -61,8 +64,7 @@ public class EmployeServiceImpltTest {
 		List<Employe> le=ems.getAllEmployes();
 		le.forEach(e->l.info(e+"\n"));
 		
-		Assert.assertEquals(1, le.size());
-
+	
 		
 		
 		
@@ -75,9 +77,9 @@ public class EmployeServiceImpltTest {
 		assertEquals(1L, e.getId());
 	}
 	@Test 
-	public void testDeleteEntrepriseById(){
-		ems.deleteEmployeById(1);
-		assertNull(ems.getEmployeById(1));
+	public void testDeleteEmployeById(){
+		ems.deleteEmployeById(2);
+		assertNull(ems.getEmployeById(2));
 	}
 	
 	
