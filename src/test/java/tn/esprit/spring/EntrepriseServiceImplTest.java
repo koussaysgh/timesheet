@@ -44,7 +44,7 @@ public class EntrepriseServiceImplTest {
 
 	l.info("\n"+ent+"\n");
 	
-	ent.setName("babasanfour");
+	ent.setName("SAMSUNG");
 	Entreprise em= ents.updateEntreprise(ent);
 	assertEquals(ent.getName(), em.getName());
 		
