@@ -42,24 +42,24 @@ public class TimesheetServiceImplTest {
 	@Test 
 	public void testaffecterMissionADepartement() throws ParseException {
 
-		Mission m=  itimesheet.getMissionById(9);
+		Mission m=  itimesheet.getMissionById(1);
 		Departement dep=ids.getDepartmentById(1);
 		m.setDepartement(dep);
-		Mission mi = itimesheet.affecterMissionADepartement(9,1);
+		Mission mi = itimesheet.affecterMissionADepartement(1,1);
 		Assert.assertEquals(m.getName(), mi.getName());
 		
 		
 	}
 	@Test
 	  public void testgetMissionById(){
-		Mission m=itimesheet.getMissionById(7);
+		Mission m=itimesheet.getMissionById(1);
 		l.info(m);
-		Assert.assertEquals(1L, m.getId());
+		Assert.assertEquals(1, m.getId());
 	}
 	@Test 
 	public void testDeleteMissionById(){
-		itimesheet.deleteMissionById(6);
-		assertNull(itimesheet.getMissionById(6));
+		itimesheet.deleteMissionById(2);
+		assertNull(itimesheet.getMissionById(2));
 	}
 	@Test
 	public void testGetAllMission() {
