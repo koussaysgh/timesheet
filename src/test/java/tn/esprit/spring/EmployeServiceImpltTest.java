@@ -1,6 +1,9 @@
 package tn.esprit.spring;
 
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -12,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import tn.esprit.spring.entities.Employe;
+import tn.esprit.spring.entities.Entreprise;
 import tn.esprit.spring.entities.Role;
 import tn.esprit.spring.repository.EmployeRepository;
 import tn.esprit.spring.services.IEmployeService;
@@ -26,10 +30,14 @@ public class EmployeServiceImpltTest {
 	private static final Logger l = Logger.getLogger(EmployeServiceImpltTest.class); 
 	@Autowired
 	EmployeRepository employeRepository;
+	
+	///get employe par id
+	// delete
+	
 	@Test
 	public void testAjoutEmploye() {
 		
-		Employe e=new Employe(12,"sami", "samsar", "sami@gmail.com", true, Role.ADMINISTRATEUR);
+		Employe e=new Employe(1,"sami", "samsar", "sami@gmail.com", true, Role.ADMINISTRATEUR);
 		Employe em= ems.ajoutEmploye(e);
 		Assert.assertEquals(e.getNom(), em.getNom());
 		
@@ -39,12 +47,13 @@ public class EmployeServiceImpltTest {
 
 	@Test
 	public void testUpdateEmploye() {
-	Employe e=ems.getEmployeById(2);
+	Employe e=ems.getEmployeById(1);
 	e.setNom("sami"+" +");
 	Employe em= ems.updateEmploye(e);
 	Assert.assertEquals(e.getNom(), em.getNom());
 	}
 
+	
 	
 	@Test
 
@@ -52,14 +61,24 @@ public class EmployeServiceImpltTest {
 		List<Employe> le=ems.getAllEmployes();
 		le.forEach(e->l.info(e+"\n"));
 		
-		
+		Assert.assertEquals(1, le.size());
 
 		
 		
 		
 	}
 	
-	
+	@Test
+	  public void testGetEmployeById(){
+		Employe e=ems.getEmployeById(1);
+		l.info(e);
+		assertEquals(1L, e.getId());
+	}
+	@Test 
+	public void testDeleteEntrepriseById(){
+		ems.deleteEmployeById(1);
+		assertNull(ems.getEmployeById(1));
+	}
 	
 	
 	

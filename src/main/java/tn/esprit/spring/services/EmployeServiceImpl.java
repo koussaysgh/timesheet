@@ -117,7 +117,23 @@ l.error("update not completed !!!!");
 		return null;
 	}
 	
+	@Override
+	public void deleteEmployeById(int employeId) {
+		
+		try {
+			Employe em=employeRepository.findById(employeId).get();
+			l.info(" get employee ");
+			employeRepository.delete(em);
+			
+			l.info(" suppression  employee  :" +em);
+		
 
+			
+		} catch (Exception e) {
+			l.error("suppression failed !!!!");	
+		}
+		
+	}
 //------------------------------------------------
 	@Override
 	public int addOrUpdateEmploye(Employe employe) {
@@ -230,11 +246,7 @@ l.error("update not completed !!!!");
 
 
 
-	@Override
-	public void deleteEmployeById(int employeId) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 
 

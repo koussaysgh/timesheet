@@ -32,14 +32,13 @@ public class DepartementServiceImplTest {
 	@Test
 	public void testAjouterDepartement() {
 		
-		Departement dep=new Departement(1,"dep1");
+		Departement dep=new Departement(1,"dep2");
 		Departement d= ids.ajouterDepartment(dep);
 		equals(d.getName());
 		}
 	
 	@Test
-
-	public void testUpdateDepartement() {
+     public void testUpdateDepartement() {
 
 	Departement dep=ids.getDepartmentById(5);
 	dep.setName("dep4");
@@ -61,6 +60,7 @@ public class DepartementServiceImplTest {
 		l.info(dep);
 		assertEquals(5L, dep.getId());
 	}
+	
 	@Test 
 	public void testDeleteDepartementById(){
 		ids.deleteDepartmentById(6);
