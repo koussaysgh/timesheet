@@ -28,9 +28,11 @@ public class EntrepriseServiceImplTest {
 	@Test
 	public void testAjouterEntreprise() {
 		
-		Entreprise ent=new Entreprise(1,"alibaba", "technologies");
+		Entreprise ent=new Entreprise(1,"ASUS", "technologies");
+		
 		Entreprise em= ents.ajouterEntreprise(ent);
-		assertEquals(em.getName(), em.getRaisonSocial());
+		
+		assertEquals(em.getName(), em.getName());
 		}
 	
 	@Test
@@ -38,6 +40,10 @@ public class EntrepriseServiceImplTest {
 	public void testUpdateEntreprise() {
 
 	Entreprise ent=ents.getEntrepriseById(1);
+	l.info("\n"+"----------------------------------------------"+"\n");
+
+	l.info("\n"+ent+"\n");
+	
 	ent.setName("babasanfour");
 	Entreprise em= ents.updateEntreprise(ent);
 	assertEquals(ent.getName(), em.getName());
@@ -48,19 +54,19 @@ public class EntrepriseServiceImplTest {
         public void testGetAllEntreprises() {
 		List<Entreprise> le=ents.getAllEntreprises();
 		le.forEach(e->l.info(e+"\n"));
-		assertEquals(1, le.size());
+		
 		
 		}
 	@Test
 	  public void testGetEntrepriseById(){
-		Entreprise ent=ents.getEntrepriseById(1);
+		Entreprise ent=ents.getEntrepriseById(2);
 		l.info(ent);
-		assertEquals(1L, ent.getId());
+		assertEquals(2, ent.getId());
 	}
 	@Test 
 	public void testDeleteEntrepriseById(){
-		ents.deleteEntrepriseById(1);
-		assertNull(ents.getEntrepriseById(1));
+		ents.deleteEntrepriseById(3);
+		assertNull(ents.getEntrepriseById(3));
 	}
 
 }
