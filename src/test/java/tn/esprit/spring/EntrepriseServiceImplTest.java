@@ -39,7 +39,7 @@ public class EntrepriseServiceImplTest {
 
 	public void testUpdateEntreprise() {
 
-	Entreprise ent=ents.getEntrepriseById(1);
+	Entreprise ent=ents.getEntrepriseById(2);
 	l.info("\n"+"----------------------------------------------"+"\n");
 
 	l.info("\n"+ent+"\n");
