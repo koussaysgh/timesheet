@@ -32,15 +32,17 @@ public class DepartementServiceImplTest {
 	@Test
 	public void testAjouterDepartement() {
 		
-		Departement dep=new Departement(1,"dep2");
+		Departement dep=new Departement(1,"dep8");
+		
 		Departement d= ids.ajouterDepartment(dep);
+		
 		equals(d.getName());
 		}
 	
 	@Test
      public void testUpdateDepartement() {
 
-	Departement dep=ids.getDepartmentById(5);
+	Departement dep=ids.getDepartmentById(1);
 	dep.setName("dep4");
 	Departement d= ids.updateDepartment(dep);
 	assertEquals(dep.getName(), d.getName());
@@ -51,20 +53,20 @@ public class DepartementServiceImplTest {
         public void testGetAllDepartements() {
 		List<Departement> dep=ids.getAllDepartements();
 		dep.forEach(e->l.info(e+"\n"));
-		assertEquals(3, dep.size());
+		
 		
 		}
 	@Test
 	  public void testGetDepartementById(){
-		Departement dep=ids.getDepartmentById(5);
+		Departement dep=ids.getDepartmentById(2);
 		l.info(dep);
-		assertEquals(5L, dep.getId());
+		assertEquals(2L, dep.getId());
 	}
 	
 	@Test 
 	public void testDeleteDepartementById(){
-		ids.deleteDepartmentById(6);
-		assertNull(ids.getDepartmentById(6));
+		ids.deleteDepartmentById(3);
+		assertNull(ids.getDepartmentById(3));
 	}
 	
 	
