@@ -7,7 +7,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import tn.esprit.spring.entities.Contrat;
 import tn.esprit.spring.entities.Departement;
 import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.entities.Mission;
@@ -34,6 +36,36 @@ public class TimesheetServiceImpl implements ITimesheetService {
 	EmployeRepository employeRepository;
 	private static final Logger l = Logger.getLogger(TimesheetServiceImpl.class); 
 	
+	@Override
+	public Mission getMissionById(int id) {
+		try {
+			l.info(" get mission with id" +id);
+
+			return  missionRepository.findById(id).get();
+		
+
+			
+		} catch (Exception e) {
+			l.error("get mission operation failed !!!!");	
+		}
+		return null;
+	}
+	
+	/*@Override
+	public Departement getDepartementById(int id) {
+		try {
+			l.info(" get departement with id" +id);
+
+			return  deptRepoistory.findById(id).get();
+		
+
+			
+		} catch (Exception e) {
+			l.error("get Departement operation failed !!!!");	
+		}
+		return null;
+	}*/
+	
 	public Mission ajouterMission(Mission mission) {
 		try {
 			l.info(" loading ajouter mission");
@@ -48,7 +80,7 @@ public class TimesheetServiceImpl implements ITimesheetService {
 		return null;
 	}
     
-	public void affecterMissionADepartement(int missionId, int depId) {
+	public Mission affecterMissionADepartement(int missionId, int depId) {
 		
 		try { 
 		
@@ -58,12 +90,15 @@ public class TimesheetServiceImpl implements ITimesheetService {
 		Mission mission = missionRepository.findById(missionId).get();
 		Departement dep = deptRepoistory.findById(depId).get();
 		mission.setDepartement(dep);
-		missionRepository.save(mission);
+		Mission m=	missionRepository.save(mission);
 		l.info("affectation complete ...");
+		return m;
+		
 		} catch (Exception e){
 			l.error("faild to affecter");
 			
 		}
+		return null;
 		
 	}
 
@@ -148,5 +183,29 @@ public class TimesheetServiceImpl implements ITimesheetService {
 		}
 		return null;
 	}
+	@Transactional
+	public void deleteMissionById(int id) {
+		try {
+			l.info(" search for Mission");
+		Mission d = missionRepository.findById(id).get();
+		l.info(" found Mission");
+		l.info(" deleting  mission");
+		missionRepository.delete(d);	
+		l.info(" operation finish  mission");
+		} catch (Exception e) {
+			l.error("mission could not be found !!!!");	
+		}
+		
+	}
+	public List<Mission> getAllMission() {
+		l.info(" In get all  mission");
+	List<Mission> missions = (List<Mission>) missionRepository.findAll();
+	for (Mission mission : missions) {
+		l.debug("mission +++ : " + mission.getName());
+	}
+	l.info("Out of getAllMission."); 
+	return missions;
+	
+}
 
 }
