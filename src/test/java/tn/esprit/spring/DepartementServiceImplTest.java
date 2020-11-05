@@ -36,7 +36,7 @@ public class DepartementServiceImplTest {
 		
 		Departement d= ids.ajouterDepartment(dep);
 		
-		equals(d.getName());
+		assertEquals(d.getName(),dep.getName());
 		}
 	
 	@Test
