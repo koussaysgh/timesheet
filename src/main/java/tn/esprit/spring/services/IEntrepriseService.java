@@ -11,11 +11,11 @@ public interface IEntrepriseService {
 	public Entreprise updateEntreprise(Entreprise entreprise);
 	public Entreprise getEntrepriseById(int entrepriseId);
 	public List<Entreprise> getAllEntreprises();
-	
-	public int ajouterDepartement(Departement dep);
+	public void deleteEntrepriseById(int entrepriseId);
+
+	/*public int ajouterDepartement(Departement dep);
 	void affecterDepartementAEntreprise(int depId, int entrepriseId);
 	List<String> getAllDepartementsNamesByEntreprise(int entrepriseId);
-	public void deleteEntrepriseById(int entrepriseId);
-	public void deleteDepartementById(int depId);
+	public void deleteDepartementById(int depId);*/
 	
 }

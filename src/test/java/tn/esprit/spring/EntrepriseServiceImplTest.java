@@ -25,6 +25,7 @@ public class EntrepriseServiceImplTest {
 	private static final Logger l = Logger.getLogger(EntrepriseServiceImplTest.class); 
 	@Autowired
 	EntrepriseRepository entrepriseRepository;
+	
 	@Test
 	public void testAjouterEntreprise() {
 		
@@ -32,12 +33,11 @@ public class EntrepriseServiceImplTest {
 		
 		Entreprise em= ents.ajouterEntreprise(ent);
 		
-		assertEquals(em.getName(), em.getName());
+		assertEquals(ent.getName(), em.getName());
 		}
 	
 	@Test
-
-	public void testUpdateEntreprise() {
+    public void testUpdateEntreprise() {
 
 	Entreprise ent=ents.getEntrepriseById(2);
 	l.info("\n"+"----------------------------------------------"+"\n");
@@ -57,6 +57,7 @@ public class EntrepriseServiceImplTest {
 		
 		
 		}
+	
 	@Test
 	  public void testGetEntrepriseById(){
 		Entreprise ent=ents.getEntrepriseById(2);
