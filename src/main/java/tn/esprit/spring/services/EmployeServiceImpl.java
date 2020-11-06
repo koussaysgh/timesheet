@@ -31,7 +31,7 @@ public class EmployeServiceImpl implements IEmployeService {
 	ContratRepository contratRepoistory;
 	@Autowired
 	TimesheetRepository timesheetRepository;
-	private static final Logger l = Logger.getLogger(EntrepriseServiceImpl.class); 
+	private static final Logger l = Logger.getLogger(EmployeServiceImpl.class); 
 
 	@Override
 	public Employe authenticate(String login, String password) {
