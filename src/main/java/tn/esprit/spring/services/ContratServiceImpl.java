@@ -48,24 +48,20 @@ public class ContratServiceImpl implements IContratService {
 	          }return null;
 	}
 
-	@Override
-	public Contrat ajoutContrat(Contrat contrat) {
-		try {
-		return contratRepository.save(contrat);
-		} catch (Exception e) {
-	           l.error("saving not completed !!!!");	
-	          }return null;
-	}
+	
 
 	@Transactional
 	public void deleteContratByRef(int contratRef) {
 		try {
 			l.info(" search for contrat");
+			if (contratRepository.findById(contratRef).isPresent()) {
 		Contrat c = contratRepository.findById(contratRef).get();
+		
 		l.info(" found contrat");
 		l.info(" deleting  contrat");
 		contratRepository.delete(c);	
 		l.info(" operation finish  contrat");
+			}
 		} catch (Exception e) {
 			l.error("contrat could not be found !!!!");	
 		}
@@ -110,6 +106,15 @@ l.error("update not completed !!!!");
 }
 		
 		return null;
+	}
+	
+	@Override
+	public Contrat ajoutContrat(Contrat contrat) {
+		try {
+		return contratRepository.save(contrat);
+		} catch (Exception e) {
+	           l.error("saving not completed !!!!");	
+	          }return null;
 	}
 
 }

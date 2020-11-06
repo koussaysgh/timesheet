@@ -41,11 +41,13 @@ public class ContratServiceImplTest {
 	}
 	
 	@Test
-	public void testUpdateContrat() {
+	public void testUpdateContrat() throws ParseException {
 	Contrat c=ics.getContratByRef(1);
-	c.setSalaire(200);
+	String sDate1="12/12/2012";
+	Date date=new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
+	c.setDateDebut(date);
 	Contrat co= ics.updateContrat(c);
-	assertEquals(co.getReference(),c.getReference());
+	assertEquals(co.getDateDebut(),c.getDateDebut());
 
 
 	}
