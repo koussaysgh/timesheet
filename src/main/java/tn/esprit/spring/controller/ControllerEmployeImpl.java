@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.validation.constraints.Pattern;
 
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
@@ -67,29 +66,10 @@ public class ControllerEmployeImpl  {
 		return navigateTo;	
 	}
 
-	public String doLogout()
-	{
-		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 	
-	return "/login.xhtml?faces-redirect=true";
-	}
 
 
-	public String addEmploye() {
-
-		if (authenticatedUser==null || !loggedIn) return "/login.xhtml?faces-redirect=true";
-
-		employeService.addOrUpdateEmploye(new Employe(nom, prenom, email, password, actif, role)); 
-		return "null"; 
-	}  
-
-	public String removeEmploye(int employeId) {
-		String navigateTo = "null";
-		if (authenticatedUser==null || !loggedIn) return "/login.xhtml?faces-redirect=true";
-
-		employeService.deleteEmployeById(employeId);
-		return navigateTo; 
-	} 
+	
 
 	public String displayEmploye(Employe empl) 
 	{
