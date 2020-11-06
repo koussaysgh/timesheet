@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import tn.esprit.spring.entities.Entreprise;
-import tn.esprit.spring.repository.DepartementRepository;
 import tn.esprit.spring.repository.EntrepriseRepository;
 import org.apache.log4j.Logger;
 
@@ -64,7 +63,6 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 	public Entreprise getEntrepriseById(int entrepriseId) {
 		try {
 			l.info(" get entreprise with id = " + entrepriseId);
-
 			    Entreprise e =  entrepriseRepository.findById(entrepriseId).get();
 				l.info("entreprise returned : " + e);
                 return e ;
