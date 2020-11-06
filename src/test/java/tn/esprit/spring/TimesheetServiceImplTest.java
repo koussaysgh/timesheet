@@ -65,7 +65,7 @@ public class TimesheetServiceImplTest {
 	public void testGetAllMission() {
 		List<Mission> le=itimesheet.getAllMission();
 		le.forEach(e->l.info(e+"\n"));
-		//assertEquals(1, le.size());
+		
 
 	}
 
