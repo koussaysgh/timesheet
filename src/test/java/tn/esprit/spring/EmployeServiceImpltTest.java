@@ -15,7 +15,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import tn.esprit.spring.entities.Employe;
-import tn.esprit.spring.entities.Entreprise;
 import tn.esprit.spring.entities.Role;
 import tn.esprit.spring.repository.EmployeRepository;
 import tn.esprit.spring.services.IEmployeService;
@@ -40,9 +39,7 @@ public class EmployeServiceImpltTest {
 		Employe e=new Employe(1,"ali", "samsar", "sami@gmail.com", true, Role.ADMINISTRATEUR);
 		
 		Employe em= ems.ajoutEmploye(e);
-		
-
-		Assert.assertEquals(e.getNom(), em.getNom());
+	Assert.assertEquals(e.getNom(), em.getNom());
 		
 		
 	}
