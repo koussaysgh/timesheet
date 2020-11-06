@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import tn.esprit.spring.entities.Contrat;
+
 import tn.esprit.spring.entities.Departement;
 import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.entities.Mission;
@@ -51,20 +51,7 @@ public class TimesheetServiceImpl implements ITimesheetService {
 		return null;
 	}
 	
-	/*@Override
-	public Departement getDepartementById(int id) {
-		try {
-			l.info(" get departement with id" +id);
-
-			return  deptRepoistory.findById(id).get();
-		
-
-			
-		} catch (Exception e) {
-			l.error("get Departement operation failed !!!!");	
-		}
-		return null;
-	}*/
+	
 	
 	public Mission ajouterMission(Mission mission) {
 		try {
@@ -125,12 +112,12 @@ public class TimesheetServiceImpl implements ITimesheetService {
 
 	
 	public void validerTimesheet(int missionId, int employeId, Date dateDebut, Date dateFin, int validateurId) {
-		System.out.println("In valider Timesheet");
+		l.info("In valider Timesheet");
 		Employe validateur = employeRepository.findById(validateurId).get();
 		Mission mission = missionRepository.findById(missionId).get();
 		//verifier s'il est un chef de departement (interet des enum)
 		if(!validateur.getRole().equals(Role.CHEF_DEPARTEMENT)){
-			System.out.println("l'employe doit etre chef de departement pour valider une feuille de temps !");
+			l.info("l'employe doit etre chef de departement pour valider une feuille de temps !");
 			return;
 		}
 		//verifier s'il est le chef de departement de la mission en question
@@ -142,7 +129,7 @@ public class TimesheetServiceImpl implements ITimesheetService {
 			}
 		}
 		if(!chefDeLaMission){
-			System.out.println("l'employe doit etre chef de departement de la mission en question");
+			l.info("l'employe doit etre chef de departement de la mission en question");
 			return;
 		}
 //
@@ -152,36 +139,27 @@ public class TimesheetServiceImpl implements ITimesheetService {
 		
 		//Comment Lire une date de la base de données
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		System.out.println("dateDebut : " + dateFormat.format(timesheet.getTimesheetPK().getDateDebut()));
+		l.info("dateDebut : " + dateFormat.format(timesheet.getTimesheetPK().getDateDebut()));
 		
 	}
 
 	
 	public List<Mission> findAllMissionByEmployeJPQL(int employeId) {
 		
-		try { 
-			l.info(" Find all mission by employe ");
+		
 		
 		return timesheetRepository.findAllMissionByEmployeJPQL(employeId);
 	
-		} catch (Exception e) { 
-			l.error("faild to find mission ");
-			
-		}
-		return null;
+		
 	}
 
 	
 	public List<Employe> getAllEmployeByMission(int missionId) {
-		try { 
-			l.info(" Find all employes by mission  ");
+		
 		
 		return timesheetRepository.getAllEmployeByMission(missionId);
-		} catch (Exception e) { 
-			l.error("faild to find employees");
-			
-		}
-		return null;
+		
+		
 	}
 	@Transactional
 	public void deleteMissionById(int id) {

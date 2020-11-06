@@ -2,7 +2,7 @@ package tn.esprit.spring;
 
 import static org.junit.Assert.*;
 
-import java.text.ParseException;
+
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -29,7 +29,7 @@ public class TimesheetServiceImplTest {
 	IDepartementService ids;
 	private static final Logger l = Logger.getLogger(TimesheetServiceImplTest.class); 
 	@Test
-	public void testAjoutMission() throws ParseException {
+	public void testAjoutMission()   {
 
 		Mission m=new Mission("ingenieur","ing ");
 		Mission mi= itimesheet.ajouterMission(m);
@@ -40,7 +40,7 @@ public class TimesheetServiceImplTest {
 		
 	}
 	@Test 
-	public void testaffecterMissionADepartement() throws ParseException {
+	public void testaffecterMissionADepartement()  {
 
 		Mission m=  itimesheet.getMissionById(1);
 		Departement dep=ids.getDepartmentById(1);

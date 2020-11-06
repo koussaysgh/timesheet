@@ -3,7 +3,7 @@ package tn.esprit.spring.services;
 import java.util.Date;
 import java.util.List;
 
-import tn.esprit.spring.entities.Departement;
+
 import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.entities.Mission;
 
@@ -18,7 +18,7 @@ public interface ITimesheetService {
 	public List<Mission> findAllMissionByEmployeJPQL(int employeId);
 	public List<Employe> getAllEmployeByMission(int missionId);
 	public Mission getMissionById(int id);
-	//Departement getDepartementById(int id);
+
 	public void deleteMissionById(int id);
 	public List<Mission> getAllMission();
 }
