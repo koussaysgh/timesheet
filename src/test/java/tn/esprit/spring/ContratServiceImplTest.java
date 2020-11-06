@@ -33,9 +33,9 @@ public class ContratServiceImplTest {
 		Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
 		Contrat c=new Contrat( 4,date1,"MENSUEL",999);
 		Contrat co= ics.ajouterContrat(c);
-		
-
 		assertEquals(co.getReference(),c.getReference());
+
+
 
 		
 	}
@@ -45,9 +45,9 @@ public class ContratServiceImplTest {
 	Contrat c=ics.getContratByRef(1);
 	c.setSalaire(200);
 	Contrat co= ics.updateContrat(c);
-	
-
 	assertEquals(co.getReference(),c.getReference());
+
+
 	}
 
 	

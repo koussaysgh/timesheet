@@ -51,10 +51,7 @@ public class ContratServiceImpl implements IContratService {
 	@Override
 	public Contrat ajoutContrat(Contrat contrat) {
 		try {
-		l.info(" loading save contrat");
-		Contrat c = contratRepository.save(contrat);
-		l.info(" Successful saving contrat");
-		return c;
+		return contratRepository.save(contrat);
 		} catch (Exception e) {
 	           l.error("saving not completed !!!!");	
 	          }return null;
