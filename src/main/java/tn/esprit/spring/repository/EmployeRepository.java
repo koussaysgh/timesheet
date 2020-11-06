@@ -15,7 +15,7 @@ import tn.esprit.spring.entities.Entreprise;
 @Repository
 public interface EmployeRepository extends CrudRepository<Employe, Integer>  {
 	
-	@Query("SELECT e FROM Employe e WHERE e.email=:email )
+	@Query("SELECT e FROM Employe e WHERE e.email=:email ")
 	public Employe getEmployeByEmailAndPassword(@Param("email")String login);
 	
 	
