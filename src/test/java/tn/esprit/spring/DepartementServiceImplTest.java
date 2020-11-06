@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.junit.Assert;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +15,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import tn.esprit.spring.entities.Departement;
-import tn.esprit.spring.entities.Entreprise;
+
 import tn.esprit.spring.repository.DepartementRepository;
-import tn.esprit.spring.repository.EntrepriseRepository;
-import tn.esprit.spring.services.IContratService;
+
 import tn.esprit.spring.services.IDepartementService;
 
 @RunWith(SpringRunner.class)
@@ -32,7 +31,7 @@ public class DepartementServiceImplTest {
 	@Test
 	public void testAjouterDepartement() {
 		
-		Departement dep=new Departement(1,"dep8");
+		Departement dep=new Departement(1,"dep10");
 		
 		Departement d= ids.ajouterDepartment(dep);
 		
@@ -42,8 +41,8 @@ public class DepartementServiceImplTest {
 	@Test
      public void testUpdateDepartement() {
 
-	Departement dep=ids.getDepartmentById(1);
-	dep.setName("dep4");
+	Departement dep=ids.getDepartmentById(2);
+	dep.setName("dep5");
 	Departement d= ids.updateDepartment(dep);
 	assertEquals(dep.getName(), d.getName());
 		
