@@ -44,8 +44,7 @@ public class ControllerEmployeImpl  {
 
 	private List<Employe> employes; 
 
-	private Integer employeIdToBeUpdated; // getter et setter
-
+	private Integer employeIdToBeUpdated;
 
 	public String doLogin() {
 
@@ -102,7 +101,6 @@ public class ControllerEmployeImpl  {
 	} 
 
 
-	// getters and setters 
 
 	public IEmployeService getEmployeService() {
 		return employeService;
